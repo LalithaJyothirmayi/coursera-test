@@ -31,6 +31,8 @@ function ShoppingListCheckOffService() {
   var toBuyItems =[
     {name : "Cookies", quantity: "10 bags"},
     {name : "Chips", quantity: "15 bags"},
+    {name : "Milk", quantity: "10 bags"},
+    {name : "Sugary things", quantity: "5 bags"},    
     {name : "Bismo Peptol", quantity: "5 bags"}
   ];
     // List of bought items
