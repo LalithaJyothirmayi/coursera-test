@@ -31,7 +31,7 @@ function NarrowItDownController(MenuSearchService) {
   menu.narrowItDown = function () {
 
 
-    if (menu.searchTerm) {
+
       var promise = MenuSearchService.narrowItDown(menu.searchTerm);
       promise.then(function (response) {
         menu.found = response;
@@ -40,7 +40,9 @@ function NarrowItDownController(MenuSearchService) {
       .catch(function (error) {
         console.log("Something went terribly wrong.");
       });
-    }
+
+
+
   };
 
   // Implementaion for removing item at given index
@@ -55,7 +57,8 @@ function MenuSearchService($http, ApiBasePath) {
   var service = this;
 
   service.narrowItDown = function (searchTerm) {
-    searchTerm=searchTerm.toLowerCase();
+
+
   return $http({
       method: "GET",
       url: (ApiBasePath + "/menu_items.json"),
@@ -64,15 +67,22 @@ function MenuSearchService($http, ApiBasePath) {
         // process result and only keep items that match
       var items = result.data.menu_items;
       var foundItems = [];
-      for (var index = 0; index < items.length; index++) {
+      if(searchTerm)
+      {
+        searchTerm=searchTerm.toLowerCase();
+        for (var index = 0; index < items.length; index++) {
         if (items[index].description.toLowerCase().indexOf(searchTerm) >= 0) {
           foundItems.push(items[index]);
 
         }
       }
+    }
+
+
+    return foundItems;
 
       // return processed items
-      return foundItems;
+
     });
 
 
